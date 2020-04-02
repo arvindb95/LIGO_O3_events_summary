@@ -129,4 +129,23 @@ legend_elements = [Line2D([],[], marker="o", color="y",linestyle="None", label="
 
 ax.legend(handles=legend_elements, loc="lower right")
 
+
+obs_cand = ["S190814bv","S191216ap"]
+
+for oc_id in range(len(obs_cand)):
+    sel_id = np.where(superevent_ids==obs_cand[oc_id])[0][0]
+    obs_cand_dist = superevent_dist[sel_id]
+    obs_cand_time = superevent_times[sel_id]
+    obs_cand_90_per_area = superevent_90_per_area[sel_id]
+    
+    r = 1.2*radius_scale/get_radius(obs_cand_90_per_area)
+    circle_trans = (fig.dpi_scale_trans + transforms.ScaledTranslation(obs_cand_time,obs_cand_dist, ax.transData))
+    circle = mpatches.Circle(np.array([0,0]), radius=r,facecolor="none", edgecolor="k", transform=circle_trans)
+    ax.add_patch(circle)
+    if (oc_id == 0):
+        ax.text(obs_cand_time+30,obs_cand_dist,obs_cand[oc_id],verticalalignment="center", horizontalalignment="left", fontsize=7)
+    else:
+        ax.text(obs_cand_time+10,obs_cand_dist+100,obs_cand[oc_id],verticalalignment="center", horizontalalignment="left", fontsize=7)
+
+
 plt.savefig("Kaplan_plot_Feb_2020.pdf")
