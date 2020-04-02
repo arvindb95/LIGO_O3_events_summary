@@ -148,4 +148,4 @@ for oc_id in range(len(obs_cand)):
         ax.text(obs_cand_time+10,obs_cand_dist+100,obs_cand[oc_id],verticalalignment="center", horizontalalignment="left", fontsize=7)
 
 
-plt.savefig("Kaplan_plot_Feb_2020.pdf")
+plt.savefig("Kaplan_plot_O3.pdf")
