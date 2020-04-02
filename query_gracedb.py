@@ -9,31 +9,31 @@ from astropy.time import Time
 from astropy.table import Table
 import numpy as np
 
-#client = GraceDb()
-#
-#superevent_iterator = client.superevents('is_public: True')
-#superevent_list = [superevent for superevent in superevent_iterator]
-#
-#for i in range(len(superevent_list)):
-#    my_evt_id = superevent_list[i]['superevent_id']
-#    my_evt_files_url = superevent_list[i]['links']['files']
-#    page = requests.get(my_evt_files_url)
-#    data = page.text
-#
-#    if ("Retraction.xml") in data:
-#        superevent_list[i] = "Retracted"
-#
-#remove_indices = [i for i,x in enumerate(superevent_list) if x=="Retracted"]
-#
-#for index in sorted(remove_indices, reverse=True):
-#    del superevent_list[index]
-#
-#superevent_file = open('sel_superevents.txt','w')
-#
-#print("Found %d superevents that match search criteria!"%len(superevent_list))
-#
-#for superevent in superevent_list:
-#    superevent_file.write("%s\n"%superevent)
+client = GraceDb()
+
+superevent_iterator = client.superevents('is_public: True')
+superevent_list = [superevent for superevent in superevent_iterator]
+
+for i in range(len(superevent_list)):
+    my_evt_id = superevent_list[i]['superevent_id']
+    my_evt_files_url = superevent_list[i]['links']['files']
+    page = requests.get(my_evt_files_url)
+    data = page.text
+
+    if ("Retraction.xml") in data:
+        superevent_list[i] = "Retracted"
+
+remove_indices = [i for i,x in enumerate(superevent_list) if x=="Retracted"]
+
+for index in sorted(remove_indices, reverse=True):
+    del superevent_list[index]
+
+superevent_file = open('sel_superevents.txt','w')
+
+print("Found %d superevents that match search criteria!"%len(superevent_list))
+
+for superevent in superevent_list:
+    superevent_file.write("%s\n"%superevent)
 
 superevent_file = open('sel_superevents.txt','r')
 
